@@ -38,7 +38,6 @@ const getOrderById = id => {
 const postOrder = order => {
   return db.collection('orders').add(order)
   .then(ref => {
-    console.log('Added order with ID: ', ref.id);
     return { id: ref.id }
   })
   .catch(err => {
@@ -47,8 +46,20 @@ const postOrder = order => {
   });
 }
 
+const putOrder = (id, order) => {
+  return db.collection('orders').doc(id).update(order)
+  .then(res => {
+    return { success: 200 }
+  })
+  .catch(err => {
+    console.log('Error putting order, err: ', err);
+    return { error: err };
+  });
+}
+
 module.exports = { 
   getOrders: getOrders,
   getOrderById: getOrderById,
-  postOrder: postOrder
+  postOrder: postOrder,
+  putOrder: putOrder
 };

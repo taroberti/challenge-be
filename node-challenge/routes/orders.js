@@ -31,4 +31,14 @@ router.post('/', async function(req, res, next) {
     res.status(500).send();
 });
 
+router.put('/:id', async function(req, res, next) {
+  const response = await ordersService.putOrder(req.params.id, req.body);
+
+  if(!response.error)
+    res.status(200).send();
+
+  if(response.error)
+    res.status(500).send();
+});
+
 module.exports = router;
