@@ -4,21 +4,31 @@ var ordersService = require('../services/orders');
 
 router.get('/', async function(req, res, next) {
 
-  const response = await ordersService.getOrders();
+  const orders = await ordersService.getOrders();
 
-  if(!response.error)
-    res.send(response);
+  if(!orders.error)
+    res.send({ orders });
 });
 
 router.get('/:id', async function(req, res, next) {
 
-  const response = await ordersService.getOrderById(req.params.id);
+  const order = await ordersService.getOrderById(req.params.id);
+
+  if(!order.error)
+    res.send({ order });
+
+  if(order.error === 'Order does not exist')
+    res.status(404).send(order);
+});
+
+router.post('/', async function(req, res, next) {
+  const response = await ordersService.postOrder(req.body);
 
   if(!response.error)
-    res.send(response);
+    res.status(200).send();
 
-  if(response.error === 'Order does not exist')
-    res.status(404).send(response);
+  if(response.error)
+    res.status(500).send();
 });
 
 module.exports = router;

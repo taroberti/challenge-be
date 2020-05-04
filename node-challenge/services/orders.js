@@ -35,7 +35,20 @@ const getOrderById = id => {
   });
 }
 
+const postOrder = order => {
+  return db.collection('orders').add(order)
+  .then(ref => {
+    console.log('Added order with ID: ', ref.id);
+    return { id: ref.id }
+  })
+  .catch(err => {
+    console.log('Error posting order, err: ', err);
+    return { error: err };
+  });
+}
+
 module.exports = { 
   getOrders: getOrders,
-  getOrderById: getOrderById
+  getOrderById: getOrderById,
+  postOrder: postOrder
 };
