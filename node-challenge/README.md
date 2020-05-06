@@ -1,10 +1,23 @@
-## Available Scripts
+## Before anything
+In the project directory (react-challenge):
 
-In the project directory (node_challenge), you can run:
+- Please, add the serviceAccountKey.json to a node-challenge/config directory.
+
+- Create the file 'serviceAccountUrl.json' to the node-challenge/config directory, with the content:
+
+```
+{
+  "URL": theDatabaseUrlHere
+}
+```
 
 ### `npm install`
 
 Please, run this command when first downloading this repository.
+
+## Available Scripts
+
+In the project directory (node_challenge), you can run:
 
 ### `npm start`
 
