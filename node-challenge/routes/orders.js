@@ -8,6 +8,9 @@ router.get('/', async function(req, res, next) {
 
   if(!orders.error)
     res.send({ orders });
+
+  if(orders.error)
+    res.status(500).send(orders);
 });
 
 router.get('/:id', async function(req, res, next) {
@@ -28,7 +31,7 @@ router.post('/', async function(req, res, next) {
     res.status(200).send();
 
   if(response.error)
-    res.status(500).send();
+    res.status(500).send(response);
 });
 
 router.put('/:id', async function(req, res, next) {
@@ -38,7 +41,7 @@ router.put('/:id', async function(req, res, next) {
     res.status(200).send();
 
   if(response.error)
-    res.status(500).send();
+    res.status(500).send(response);
 });
 
 module.exports = router;

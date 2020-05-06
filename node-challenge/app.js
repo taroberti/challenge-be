@@ -5,11 +5,9 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors')
 
-var indexRouter = require('./routes/index');
 var ordersRouter = require('./routes/orders');
 
 var app = express();
-const port = 4000;
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -18,7 +16,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
-app.use('/', indexRouter);
 app.use('/orders', ordersRouter);
 
 // catch 404 and forward to error handler
@@ -36,7 +33,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-app.listen(port, () => console.log(`Listening at http://localhost:${port}`));
 
 module.exports = app;
